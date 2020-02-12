@@ -16,40 +16,24 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import uk.ac.man.cs.eventlite.entities.Event;
 
 @Service
-public class EventServiceImpl implements EventService {
+public class EventServiceImpl implements EventService, EventRepository<Event> {
 
 	private final static Logger log = LoggerFactory.getLogger(EventServiceImpl.class);
 
 	private final static String DATA = "data/events.json";
+	
+	private EventRepository eventRepository;
 
-	@Override
 	public long count() {
-		long count = 0;
-		Iterator<Event> i = findAll().iterator();
-
-		for (; i.hasNext(); count++) {
-			i.next();
-		}
-
-		return count;
+		eventRepository.count();
 	}
 
-	@Override
 	public Iterable<Event> findAll() {
-		ArrayList<Event> events = new ArrayList<Event>();
-
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.registerModule(new JavaTimeModule());
-
-			InputStream in = new ClassPathResource(DATA).getInputStream();
-
-			events = mapper.readValue(in, mapper.getTypeFactory().constructCollectionType(List.class, Event.class));
-		} catch (Exception e) {
-			log.error("Exception while reading file '" + DATA + "': " + e);
-			// If we can't read the file, then the event list is empty...
-		}
-
-		return events;
+		
+		eventRepository.findAll();
+	}
+	
+	public Event save(Event event) {
+		eventRepository.save(event);
 	}
 }
