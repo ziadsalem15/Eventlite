@@ -10,9 +10,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
-@Table(name = "Event")
+@Table(name = "events")
 public class Event {
+	
 	@Id
+	@GeneratedValue
 	private long id;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -26,6 +28,16 @@ public class Event {
 	private String name;
 
 	private long venue;
+	
+	public Event(long id, LocalDate date, LocalTime time, String name, long venue)
+	{
+		this.id = id;
+		this.date = date;
+		this.time = time;
+		this.name = name;
+		this.venue = venue;
+	}
+	
 
 	public Event() {
 	}
