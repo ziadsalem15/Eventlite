@@ -37,9 +37,9 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			
 		} else 
 		{
-			eventService.save(new Event(1, LocalDate.of(2020, 05, 11), LocalTime.of(15, 00), "COMP23412 Showcase, group G", 1));
-			eventService.save(new Event(2, LocalDate.of(2020, 05, 05), LocalTime.of(10, 00), "COMP23412 Showcase, group H", 1));
-			eventService.save(new Event(3, LocalDate.of(2020, 05, 07), LocalTime.of(11, 00), "COMP23412 Showcase, group F", 1));
+			eventService.save(new Event(1, LocalDate.of(2020, 05, 11), LocalTime.of(15, 00), "COMP23412 Showcase, group G", new Venue (1, "Tootill 1", 50)));
+			eventService.save(new Event(2, LocalDate.of(2020, 05, 05), LocalTime.of(10, 00), "COMP23412 Showcase, group H", new Venue (1, "Tootill 1", 50)));
+			eventService.save(new Event(3, LocalDate.of(2020, 05, 07), LocalTime.of(11, 00), "COMP23412 Showcase, group F", new Venue (1, "Tootill 1", 50)));
 			
 		}
 		

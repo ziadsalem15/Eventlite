@@ -7,7 +7,6 @@ import javax.persistence.*;
 	
 public class Venue {
 
-
 	@Id
 	@GeneratedValue
 	private long id;
@@ -15,9 +14,6 @@ public class Venue {
 	private String name;
 
 	private int capacity;
-
-	public Venue() {
-	}
 	
 	public Venue(long id, String name, int capacity)
 	{
@@ -25,6 +21,8 @@ public class Venue {
 		this.name = name;
 		this.capacity = capacity;
 	}
+	
+	public Venue() {}
 
 	public long getId() {
 		return id;
