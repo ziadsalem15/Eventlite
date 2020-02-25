@@ -24,6 +24,7 @@
           <td th:text="${venues[e.venue - 1].name}">Event venue</td>
           <td th:text="${{e.date}}">Event date</td>
           <td th:text="${{e.time}}">Event time</td>
+          <td><button type="delete">Delete</button></td>
         </tr>
       </tbody>
     </table>
