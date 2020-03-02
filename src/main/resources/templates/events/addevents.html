@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+  <title>Add an Event</title>
+</head>
+<body>
+  <form th:action="@{/addevents}" th:object="${addevents}" method="post">
+  <label for="name">Event Name</label><br>
+  <input type="text" id="name" name="event" autofocus="autofocus" th:value"$(name)" /> </th><br>
+  
+  <label for="name">Venue</label><br>
+  <input type="text" id="venue" name="venue" autofocus="autofocus" th:value"$(venue)" /> </th><br>
+  
+  <label for="name">Date</label><br>
+  <input type="date" id="date" name="date" autofocus="autofocus" th:value"$(date)" /> </th><br>
+  
+  <label for="name">Time</label><br>
+  <input type="time" id="time" name="time" autofocus="autofocus" th:value"$(time)" /> </th><br>
+  
+ 
+  <input type="submit" id="submit" name="submit" autofocus="autofocus" th:value"$(submit)" /> </th>
+  <input type="reset" id="reset" name="reset" autofocus="autofocus" th:value"$(reset)" /> </th>
+  
+  </form>
+  
+  
+</body>
+</html>
