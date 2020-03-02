@@ -38,6 +38,14 @@ public class Event {
 		this.venue = venue;
 	}
 	
+	public Event(String name, long venue, LocalDate date, LocalTime time)
+	{
+		this.name = name;
+		this.venue = venue;
+		this.date = date;
+		this.time = time;
+	}
+	
 
 	public Event() {
 	}
