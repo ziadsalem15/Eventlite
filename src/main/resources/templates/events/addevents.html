@@ -6,7 +6,7 @@
   <title>Add an Event</title>
 </head>
 <body>
-  <form th:action="@{/addevents}" th:object="${addevents}" method="post">
+  <form action = # th:action="@{/events}" th:object="${events}" method="post">
   <label for="name">Event Name</label><br>
   <input type="text" id="name" name="event" autofocus="autofocus" th:value"$(name)" /> </th><br>
   
