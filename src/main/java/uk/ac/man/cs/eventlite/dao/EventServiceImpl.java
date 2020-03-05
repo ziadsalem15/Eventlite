@@ -30,6 +30,11 @@ public class EventServiceImpl implements EventService {
 		return eventRepository.save(event);
 	}
 	
+		@Override
+	public Optional<Event> findById(long id) {
+		return eventRepository.findById(id);
+	}
+	
 	public void deleteById(long id) {
 		eventRepository.deleteById(id);
 	}
