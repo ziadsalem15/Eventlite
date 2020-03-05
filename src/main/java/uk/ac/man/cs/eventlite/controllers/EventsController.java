@@ -1,5 +1,7 @@
 package uk.ac.man.cs.eventlite.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,7 @@ public class EventsController {
 	public String event(@PathVariable("id") long id,
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
 
-		Event event = eventService.findOne(id);
+		Optional<Event> event = eventService.findById(id);
 		model.addAttribute("event", event);
 
 		return "events/show";
