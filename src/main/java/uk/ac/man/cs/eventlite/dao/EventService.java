@@ -12,8 +12,6 @@ public interface EventService {
 	
 	public Optional<Event> findById(long id);
 	
-	public Event findOne(long id);
-	
 	public Event save(Event event);
 	
 	public void deleteById(long id);

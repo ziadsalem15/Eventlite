@@ -34,6 +34,7 @@ public class EventServiceImpl implements EventService {
 	public Optional<Event> findById(long id) {
 		return eventRepository.findById(id);
 	}
+<<<<<<< Upstream, based on branch 'master' of ssh://gitlab@gitlab.cs.man.ac.uk:22222/comp23412_2019/eventlite_H13.git
 	
 	public void deleteById(long id) {
 		eventRepository.deleteById(id);
@@ -46,6 +47,11 @@ public class EventServiceImpl implements EventService {
 	
 	public Iterable<Event> listEventByName(String name){
 		return eventRepository.findByNameContaining(name);
+=======
+		
+	public Event save(Event event) {
+		return eventRepository.save(event);
+>>>>>>> b6e3fbc Delete unused methods
 	}
 }
 
