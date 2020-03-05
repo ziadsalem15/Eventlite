@@ -30,12 +30,7 @@ public class EventServiceImpl implements EventService {
 	public Optional<Event> findById(long id) {
 		return eventRepository.findById(id);
 	}
-	
-	@Override
-	public Event findOne(long id) {
-		return findById(id).orElse(null);
-	}
-	
+		
 	public Event save(Event event) {
 		return eventRepository.save(event);
 	}
