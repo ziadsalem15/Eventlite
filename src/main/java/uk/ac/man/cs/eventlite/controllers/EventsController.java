@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 
+import uk.ac.man.cs.eventlite.entities.*;
+
 @Controller
 @RequestMapping(value = "/events", produces = { MediaType.TEXT_HTML_VALUE })
 public class EventsController {
@@ -38,6 +40,16 @@ public class EventsController {
 		eventService.deleteById(id);
 		
 		return "redirect:/events";
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String event(@PathVariable("id") long id,
+			@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
+
+		Event event = eventService.findOne(id);
+		model.addAttribute("event", event);
+
+		return "events/show";
 	}
 
 }
