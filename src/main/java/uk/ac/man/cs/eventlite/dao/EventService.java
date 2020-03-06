@@ -9,4 +9,7 @@ public interface EventService {
 	public Iterable<Event> findAll();
 	
 	public Event save(Event event);
+	
+	public Iterable<Event> sort();
+
 } 
