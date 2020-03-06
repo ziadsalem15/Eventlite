@@ -78,11 +78,12 @@ public class EventsControllerApiTest {
 	@Test
 	public void getIndexWithEvents() throws Exception {
 		Event e = new Event();
+		Venue v = new Venue();
 		e.setId(0);
 		e.setName("Event");
 		e.setDate(LocalDate.now());
 		e.setTime(LocalTime.now());
-		e.setVenue(new Venue());
+		e.setVenue(v);
 		when(eventService.findAll()).thenReturn(Collections.<Event>singletonList(e));
 
 		mvc.perform(get("/api/events").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
