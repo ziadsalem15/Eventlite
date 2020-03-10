@@ -1,6 +1,9 @@
 package uk.ac.man.cs.eventlite.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "venues")
@@ -15,7 +18,10 @@ public class Venue {
 
 	private int capacity;
 	
-	public Venue(long id, String name, int capacity)
+	@OneToMany(mappedBy="venue")
+	private List<Event> events = new ArrayList<Event>();
+	
+	public Venue(long id, String name, int capacity, Venue venue)
 	{
 		this.id = id;
 		this.name = name;
@@ -47,4 +53,5 @@ public class Venue {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
+	
 }

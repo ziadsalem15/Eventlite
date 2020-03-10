@@ -12,6 +12,8 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +49,10 @@ public class EventsControllerApi {
 		}
 
 		return new Resources<Resource<Event>>(resources, selfLink);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Event> deleteEvent(@PathVariable("id") long id) {
+		return ResponseEntity.noContent().build();
 	}
 }

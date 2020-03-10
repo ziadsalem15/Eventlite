@@ -31,29 +31,43 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
-		if (eventService.count() > 0) {
+		if (eventService.count() > 0 || venueService.count() > 0 ) {
 			log.info("Database already populated. Skipping data initialization.");
 			return;
 			
 		} else 
 		{
-			eventService.save(new Event(1, LocalDate.of(2020, 05, 11), LocalTime.of(15, 00), "COMP23412 Showcase, group G", new Venue (1, "Tootill 1", 50)));
-			eventService.save(new Event(2, LocalDate.of(2020, 05, 05), LocalTime.of(10, 00), "COMP23412 Showcase, group H", new Venue (1, "Tootill 1", 50)));
-			eventService.save(new Event(3, LocalDate.of(2020, 05, 07), LocalTime.of(11, 00), "COMP23412 Showcase, group F", new Venue (1, "Tootill 1", 50)));
 			
+			Venue venue1 = new Venue();
+			venue1.setName("Kilburn G23");
+			venue1.setCapacity(80);
+			venueService.save(venue1);
+			
+			Event event1 = new Event();
+			LocalDate date1 = LocalDate.of(2020, 05, 11);
+			LocalTime time1 = LocalTime.of(15, 00);
+			event1.setName("COMP23412 Showcase, group G");
+			event1.setDate(date1);
+			event1.setTime(time1);
+			event1.setVenue(venue1);
+			eventService.save(event1);
+			
+			Event event2 = new Event();
+			LocalTime time2 = LocalTime.of(10, 00);
+			LocalTime time3 = LocalTime.of(11, 00);
+			event2.setDate(date1);
+			event2.setTime(time2);
+			event2.setVenue(venue1);
+			event2.setName("COMP23412 Showcase, group H");
+			eventService.save(event2);
+			
+			Event event3 = new Event();
+			event3.setDate(date1);
+			event3.setTime(time3);
+			event3.setVenue(venue1);
+			event3.setName("COMP23412 Showcase, group F");
+			eventService.save(event3);
 		}
-		
-
-		if (venueService.count() > 0) {
-			log.info("Database already populated. Skipping data initialization.");
-			return;
-			
-		} else 
-		{
-			venueService.save(new Venue(1, "Kilburn, G23", 80));
-			
-		}
-
 		// Build and save initial models here.
 
 	}

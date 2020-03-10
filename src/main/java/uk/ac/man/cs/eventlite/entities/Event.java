@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Event {
 	
 	@Id
+	@NotNull
 	@GeneratedValue
 	private long id;
 

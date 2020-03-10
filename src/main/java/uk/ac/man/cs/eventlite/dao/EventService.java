@@ -10,5 +10,8 @@ public interface EventService {
 	
 	public Event save(Event event);
 	
-	public void delete(Event event);
+	public void deleteById(long id);
+	
+	public Iterable<Event> sort();
+	
 } 
