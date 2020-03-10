@@ -5,5 +5,15 @@
 <head>
   <title>An event</title>
 </head>
+<body>
+  <div layout:fragment="content">
+    <h1>An event</h1>
+    
+      
+  <form th:text="@{/events/{num}(num=${id})}">
 
+
+  </div>  
+    
+</body>
 </html>
