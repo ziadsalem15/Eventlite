@@ -33,5 +33,9 @@ public class EventServiceImpl implements EventService {
 	{
 		return eventRepository.findAllByOrderByDateAscTimeAsc();
 	}
+	
+	public Iterable<Event> listEventByName(String name){
+		return eventRepository.findByNameContaining(name);
+	}
 }
 

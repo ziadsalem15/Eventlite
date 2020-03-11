@@ -11,5 +11,7 @@ public interface EventService {
 	public Event save(Event event);
 	
 	public Iterable<Event> sort();
+	
+	public Iterable<Event> listEventByName(String name);
 
 } 
