@@ -53,15 +53,5 @@ public class EventsController {
 
 		return "events/show";
 	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String event(@PathVariable("id") long id,
-			@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-
-		Optional<Event> event = eventService.findById(id);
-		model.addAttribute("event", event);
-
-		return "events/show";
-	}
 
 }
