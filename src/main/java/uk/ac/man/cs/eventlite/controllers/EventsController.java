@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
@@ -22,10 +23,14 @@ public class EventsController {
 	private VenueService venueService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getAllEvents(Model model) {
-
-		model.addAttribute("events", eventService.sort());
-		return "events/index";
+	public String getAllEvents(Model model, @RequestParam (value = "search", required = false) String search) {
+			if (search == null) {
+				model.addAttribute("events", eventService.sort());
+				return "events/index";
+			} else {
+			model.addAttribute("events", eventService.listEventByName(search));
+			return "events/index";
+			}
 	}
 	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)

@@ -14,4 +14,6 @@ public interface EventService {
 	
 	public Iterable<Event> sort();
 	
+	public Iterable<Event> listEventByName(String name);
+	
 } 
