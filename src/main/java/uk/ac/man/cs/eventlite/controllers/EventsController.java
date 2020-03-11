@@ -29,9 +29,7 @@ public class EventsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAllEvents(Model model) {
 
-		model.addAttribute("events", eventService.findAll());
-		model.addAttribute("venues", venueService.findAll());
-
+		model.addAttribute("events", eventService.sort());
 		return "events/index";
 	}
 	

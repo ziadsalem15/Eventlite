@@ -13,4 +13,7 @@ public interface EventService {
 	public Optional<Event> findById(long id);
 	
 	public Event save(Event event);
+	
+	public Iterable<Event> sort();
+
 } 

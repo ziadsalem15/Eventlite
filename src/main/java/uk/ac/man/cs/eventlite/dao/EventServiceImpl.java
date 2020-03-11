@@ -34,4 +34,10 @@ public class EventServiceImpl implements EventService {
 	public Event save(Event event) {
 		return eventRepository.save(event);
 	}
+	
+	public Iterable<Event> sort()
+	{
+		return eventRepository.findAllByOrderByDateAscTimeAsc();
+	}
 }
+
