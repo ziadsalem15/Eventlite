@@ -37,6 +37,7 @@ public class EventsControllerApi {
 		return eventToResource(eventService.findAll());
 	}
 	
+<<<<<<< HEAD
 <<<<<<< Upstream, based on branch 'master' of ssh://gitlab@gitlab.cs.man.ac.uk:22222/comp23412_2019/eventlite_H13.git
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Resource<Event> event(@PathVariable("id") long id) {
@@ -47,6 +48,8 @@ public class EventsControllerApi {
 	
 =======
 >>>>>>> b6e3fbc Delete unused methods
+=======
+>>>>>>> refs/remotes/origin/ViewInSpeparatePage
 	private Resource<Event> eventToResource(Event event) {
 		Link selfLink = linkTo(EventsControllerApi.class).slash(event.getId()).withSelfRel();
 

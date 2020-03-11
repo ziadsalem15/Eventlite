@@ -2,10 +2,15 @@ package uk.ac.man.cs.eventlite.dao;
 
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+=======
+>>>>>>> refs/remotes/origin/ViewInSpeparatePage
 
 import uk.ac.man.cs.eventlite.entities.Event;
 
@@ -26,6 +31,11 @@ public class EventServiceImpl implements EventService {
 		return eventRepository.findAll();
 	}
 	
+	@Override
+	public Optional<Event> findById(long id) {
+		return eventRepository.findById(id);
+	}
+		
 	public Event save(Event event) {
 		return eventRepository.save(event);
 	}
