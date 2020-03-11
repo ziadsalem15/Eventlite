@@ -21,6 +21,7 @@
       <form th:object="${event}" action="/events" method="get">
       <input type="text" name = "search" th:value="${search}" id = "search"/>
       <input type ="submit" value = "Search..">
+      </form>      
       <tbody>
         <tr th:each="e : ${events}">
           <td>
@@ -30,13 +31,12 @@
           <td th:text="${{e.date}}">Event date</td>
           <td th:text="${{e.time}}">Event time</td>
           <td>
-          	<form th:action="@{/events/delete/{id}(id=${e.id})}" th:method="delete">
+          	<form th:object="${event}" th:action="@{/events/delete/{id}(id=${e.id})}" th:method="delete">
           		<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
           	</form>
           </td>
         </tr>
       </tbody>
-      </form>
     </table>
 
   </div>
