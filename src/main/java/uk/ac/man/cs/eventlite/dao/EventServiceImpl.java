@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import uk.ac.man.cs.eventlite.entities.Event;
+import uk.ac.man.cs.eventlite.entities.Venue;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -16,6 +17,9 @@ public class EventServiceImpl implements EventService {
 	@Autowired
 	private EventRepository eventRepository;
 
+	@Autowired
+	private VenueRepository venueRepository;
+	
 	@Override
 	public long count() {
 		return eventRepository.count();
@@ -25,6 +29,11 @@ public class EventServiceImpl implements EventService {
 	public Iterable<Event> findAll() {
 		
 		return eventRepository.findAll();
+	}
+	
+	@Override
+	public Iterable<Venue> findAllVenues() {
+		return venueRepository.findAll();
 	}
 	
 	public Event save(Event event) {
