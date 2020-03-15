@@ -23,9 +23,6 @@ public class EventsController {
 	@Autowired
 	private EventService eventService;
 
-	@Autowired
-	private VenueService venueService;
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAllEvents(Model model, @RequestParam (value = "search", required = false) String search) {
 			if (search == null) {
