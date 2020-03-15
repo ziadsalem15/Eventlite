@@ -15,16 +15,19 @@ public class Venue {
 	private long id;
 	
 	private String name;
+	
+	private String address;
 
 	private int capacity;
 	
 	@OneToMany(mappedBy="venue")
 	private List<Event> events = new ArrayList<Event>();
 	
-	public Venue(long id, String name, int capacity, Venue venue)
+	public Venue(long id, String name, String address, int capacity, Venue venue)
 	{
 		this.id = id;
 		this.name = name;
+		this.address = address;
 		this.capacity = capacity;
 	}
 	
@@ -44,6 +47,14 @@ public class Venue {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public int getCapacity() {
