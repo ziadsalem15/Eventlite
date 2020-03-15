@@ -11,8 +11,6 @@ public interface EventService {
 
 	public Iterable<Event> findAll();
 	
-	public Iterable<Venue> findAllVenues();
-	
 	public Optional<Event> findById(long id);
 	
 	public Event save(Event event);
