@@ -5,20 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import uk.ac.man.cs.eventlite.entities.Event;
-import uk.ac.man.cs.eventlite.entities.Venue;
 
 @Service
 public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private EventRepository eventRepository;
-
-	@Autowired
-	private VenueRepository venueRepository;
 	
 	@Override
 	public long count() {
