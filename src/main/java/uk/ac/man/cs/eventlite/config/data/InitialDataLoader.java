@@ -40,7 +40,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			
 			Venue venue1 = new Venue();
 			venue1.setName("Kilburn G23");
-			venue1.setAddress("Oxford Rd, Manchester, M13 9PL");
+			//venue1.setAddress("Oxford Rd, Manchester, M13 9PL");
 			venue1.setCapacity(80);
 			venueService.save(venue1);
 			
