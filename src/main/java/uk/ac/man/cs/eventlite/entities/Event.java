@@ -28,7 +28,7 @@ public class Event {
 	private LocalTime time;
 
 	private String name;
-
+	
 	@ManyToOne
 	private Venue venue;
 	
