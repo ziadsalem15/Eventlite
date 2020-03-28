@@ -2,15 +2,19 @@ package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
@@ -47,16 +51,29 @@ public class EventsController {
 		
 		return "redirect:/events";
 	}
-	@RequestMapping(method = RequestMethod.POST)
-	public String updateEvent(@ModelAttribute Event event, @RequestParam("date") LocalDate date, @RequestParam("time") LocalTime time, @RequestParam("venue") Venue venue)
-	{
-		event.setDate(date);
-		event.setTime(time);
-		event.setVenue(venue);
-		eventService.save(event);
-		return "redirect:/events";
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public String getEvent(Model model, @PathVariable("id") long id) {
+		Event event = eventService.findById(id).get();
+		model.addAttribute("updateEvent", event);
+		model.addAttribute("venues", venueService.findAll());
+		return "events/update";
 	}
 	
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+	public String updateTheEvent(@PathVariable("id") long id,
+			BindingResult errors, Model model, @ModelAttribute Event event, RedirectAttributes redirectAttrs) {
+
+		if (errors.hasErrors()) {
+			model.addAttribute("updateEvent", event);
+			return "events/update";
+		}
+
+		eventService.save(event);
+		redirectAttrs.addFlashAttribute("ok_message", "The event is updated");
+		model.addAttribute("events", eventService.findAll());
+		return "redirect:/events";
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String event(@PathVariable("id") long id,
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {

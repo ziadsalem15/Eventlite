@@ -16,6 +16,9 @@
   	<form th:object="${event}" th:action="@{/events/delete/{id}(id=${id})}" th:method="delete">
     	<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
     </form>
+    <form th:action="@{/events/update/{id}(id=${id})}">
+    	<button type="submit" class="btn btn-primary"><i class="fas fa-primary"></i> Update</button>
+    </form>
   </td>
 
   </div>  

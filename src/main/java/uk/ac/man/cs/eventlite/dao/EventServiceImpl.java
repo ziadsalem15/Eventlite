@@ -50,10 +50,10 @@ public class EventServiceImpl implements EventService {
 	}
 
 
-    @Override
+    /*@Override
     public void update(Event event)
     {
 	    eventRepository.updateEvent(event);
-    }
+    }*/
 }
 
