@@ -12,4 +12,6 @@ public interface VenueService {
 	
 	public Iterable<Venue> sort();
 	
+	public Iterable<Venue> listVenueByName(String name);
+	
 }
