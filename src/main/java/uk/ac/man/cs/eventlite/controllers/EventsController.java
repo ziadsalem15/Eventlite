@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,7 +58,9 @@ public class EventsController {
 		model.addAttribute("updateEvent", event);
 		model.addAttribute("venues", venueService.findAll());
 		return "events/update";
-	}
+	} 
+	
+	
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String updateTheEvent(@PathVariable("id") long id,
@@ -70,9 +73,10 @@ public class EventsController {
 
 		eventService.save(event);
 		redirectAttrs.addFlashAttribute("ok_message", "The event is updated");
-		model.addAttribute("events", eventService.findAll());
+		//model.addAttribute("events", eventService.findAll());
 		return "redirect:/events";
 	}
+	
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String event(@PathVariable("id") long id,
