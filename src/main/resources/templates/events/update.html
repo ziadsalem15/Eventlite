@@ -17,8 +17,9 @@
 		  <input type="time" id="time" name="time" th:value"${updateEvent.time}" /> </th><br>
 		  
 		  <label for="name">Venue</label><br>
-		  <input type="text" id="venue" name="venue" th:value"${updateEvent.venue}" /> </th><br>
-		 
+		  <select id="venue" name="venue">
+		  	<option th:each="v : ${venues}" th:value="${v.id}" th:text="${v.name}" />
+		  </select>		 
 		  <input type="submit" id="submit" name="submit" autofocus="autofocus" th:value"$(submit)" /> </th>
 		  <input type="reset" id="reset" name="reset" autofocus="autofocus" th:value"$(reset)" /> </th>
       </form>
