@@ -3,6 +3,7 @@ package uk.ac.man.cs.eventlite.controllers;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -45,7 +46,6 @@ public class EventsController {
 			return "events/index";
 			}
 	}
-	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
 	public String deleteEvent(@PathVariable("id") long id, Model model) {
 		eventService.deleteById(id);
@@ -64,7 +64,7 @@ public class EventsController {
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String updateTheEvent(@PathVariable("id") long id,
-			BindingResult errors, Model model, @ModelAttribute Event event, RedirectAttributes redirectAttrs) {
+			Model model, @RequestBody @Valid @ModelAttribute Event event, RedirectAttributes redirectAttrs, BindingResult errors) {
 
 		if (errors.hasErrors()) {
 			model.addAttribute("updateEvent", event);
@@ -73,18 +73,18 @@ public class EventsController {
 
 		eventService.save(event);
 		redirectAttrs.addFlashAttribute("ok_message", "The event is updated");
-		//model.addAttribute("events", eventService.findAll());
+		model.addAttribute("events", eventService.findAll());
 		return "redirect:/events";
 	}
 	
 
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String event(@PathVariable("id") long id,
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
 
 		Optional<Event> event = eventService.findById(id);
 		model.addAttribute("event", event);
-
 		return "events/show";
 	}
 
