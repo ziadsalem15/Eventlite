@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+  <title>Update an Event</title>
+</head>
+<body>
+	<div layout:fragment="content">      
+      <form th:action="@{/events/update/{id}(id=${id})}" th:object="${events}" method="post">
+      	  <label for="name">Event Name</label><br>
+		  <input type="text" id="name" name="name" th:value"${updateEvent.name}" /> </th><br>
+		  <label for="name">Date</label><br>
+		  <input type="date" id="date" name="date" th:value"${updateEvent.date}" /> </th><br>
+		  
+		  <label for="name">Time</label><br>
+		  <input type="time" id="time" name="time" th:value"${updateEvent.time}" /> </th><br>
+		  
+		  <label for="name">Venue</label><br>
+		  <select id="venue" name="venue">
+		  	<option th:each="v : ${venues}" th:value="${v.id}" th:text="${v.name}" />
+		  </select>		 
+		  <input type="submit" id="submit" name="submit" autofocus="autofocus" th:value"$(submit)" /> </th>
+		  <input type="reset" id="reset" name="reset" autofocus="autofocus" th:value"$(reset)" /> </th>
+      </form>
+ 	</div>      
+</body>
+</html>
