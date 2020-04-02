@@ -46,5 +46,12 @@ public class EventServiceImpl implements EventService {
 	public Iterable<Event> listEventByName(String name){
 		return eventRepository.findByNameContainingOrderByDateAscNameAsc(name);
 	}
+
+
+    /*@Override
+    public void update(Event event)
+    {
+	    eventRepository.updateEvent(event);
+    }*/
 }
 
