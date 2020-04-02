@@ -47,11 +47,5 @@ public class EventServiceImpl implements EventService {
 		return eventRepository.findByNameContainingOrderByDateAscNameAsc(name);
 	}
 
-
-    /*@Override
-    public void update(Event event)
-    {
-	    eventRepository.updateEvent(event);
-    }*/
 }
 
