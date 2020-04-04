@@ -77,8 +77,6 @@ public class EventsController {
 		return "redirect:/events";
 	}
 	
-
-	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String event(@PathVariable("id") long id,
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
@@ -87,5 +85,5 @@ public class EventsController {
 		model.addAttribute("event", event);
 		return "events/show";
 	}
-
+	
 }
