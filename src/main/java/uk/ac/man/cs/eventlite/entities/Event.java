@@ -2,7 +2,7 @@ package uk.ac.man.cs.eventlite.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+import java.util.Optional;
 import javax.persistence.Entity;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
@@ -31,6 +31,8 @@ public class Event {
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime time;
+	
+	
 
 	@NotEmpty(message = "Name may not be empty")
 	@Size(min = 1, max = 255, message = "Name must be between 1 and 255 characters long")
@@ -67,8 +69,8 @@ public class Event {
 		this.date = date;
 	}
 
-	public LocalTime getTime() {
-		return time;
+	public Optional<LocalTime> getTime() {
+		return Optional.ofNullable(time);
 	}
 
 	public void setTime(LocalTime time) {
