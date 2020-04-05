@@ -27,6 +27,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
 	@Autowired
 	private VenueService venueService;
+	
+	private final String MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZ3JvdXAtaDEzIiwiYSI6ImNrOGZ4dXdxbTAwaTgzZ3A3ZDg5NjR0a2IifQ.zJHpLl4QfI0v-AR9mbSGcw";
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
