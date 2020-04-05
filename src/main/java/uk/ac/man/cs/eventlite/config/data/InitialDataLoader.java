@@ -2,6 +2,7 @@ package uk.ac.man.cs.eventlite.config.data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.mapbox.api.geocoding.v5.MapboxGeocoding;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import uk.ac.man.cs.eventlite.entities.Event;
@@ -30,6 +38,45 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 	
 	private final String MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiZ3JvdXAtaDEzIiwiYSI6ImNrOGZ4dXdxbTAwaTgzZ3A3ZDg5NjR0a2IifQ.zJHpLl4QfI0v-AR9mbSGcw";
 
+	/*
+	 * 	Takes venue address as string and returns latitude and longitude as a double array with two values
+	 * 
+	 * 	@param address the address of the venue to return the latitude and longitude of
+	 * 	@return the latitude and longitude respectively as a double array of size 2
+	 */
+	private double[] getGeocoding(String address) {
+		MapboxGeocoding geocoding = MapboxGeocoding.builder().accessToken(MAPBOX_ACCESS_TOKEN).query(address).build();
+		
+		double[] latLongPair = new double[2];
+		geocoding.enqueueCall(new Callback<GeocodingResponse>() {
+
+			@Override
+			public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
+				List<CarmenFeature> results = response.body().features();
+				
+				if(results.size() > 0) {
+					latLongPair[0] = results.get(0).center().latitude();
+					latLongPair[1] = results.get(0).center().longitude();
+				}
+			}
+
+			@Override
+			public void onFailure(Call<GeocodingResponse> call, Throwable t) {
+				// TODO Auto-generated method stub
+				t.printStackTrace();
+			}
+			
+		});
+		
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		return latLongPair;
+	}
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
@@ -39,11 +86,13 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			
 		} else 
 		{
-			
 			Venue venue1 = new Venue();
 			venue1.setName("Kilburn G23");
 			venue1.setAddress("Oxford Rd, Manchester, M13 9PL");
 			venue1.setCapacity(80);
+			double[] latLongPair = this.getGeocoding(venue1.getAddress());
+			venue1.setLatitude(latLongPair[0]);
+			venue1.setLongitude(latLongPair[1]);
 			venueService.save(venue1);
 			
 			Event event1 = new Event();
