@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+
 @Entity
-@Table(name = "venues")
-	
+@Table(name = "venues")	
 public class Venue {
 
 	@Id
@@ -20,6 +20,9 @@ public class Venue {
 
 	private int capacity;
 	
+	private double longitude;
+	private double latitude;
+	
 	@OneToMany(mappedBy="venue")
 	private List<Event> events = new ArrayList<Event>();
 	
@@ -31,9 +34,7 @@ public class Venue {
 		this.capacity = capacity;
 	}
 	
-	public Venue() {
-		address = "hallo";
-	}
+	public Venue() {}
 
 	public long getId() {
 		return id;
@@ -65,6 +66,22 @@ public class Venue {
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 	
 }
