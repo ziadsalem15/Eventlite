@@ -88,12 +88,33 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 		{
 			Venue venue1 = new Venue();
 			venue1.setName("Kilburn G23");
-			venue1.setAddress("Oxford Rd, Manchester, M13 9PL");
+			venue1.setAddress("Kilburn Building, Oxford Rd, Manchester, M13 9PL");
 			venue1.setCapacity(80);
 			double[] latLongPair = this.getGeocoding(venue1.getAddress());
 			venue1.setLatitude(latLongPair[0]);
 			venue1.setLongitude(latLongPair[1]);
 			venueService.save(venue1);
+			
+			/*
+			 * Venue 2 and venue 3 are only for demonstration of the event map
+			 */
+			Venue venue2 = new Venue();
+			venue2.setName("University Place");
+			venue2.setAddress("176 Oxford Rd, Manchester, M13 9PL");
+			venue2.setCapacity(120);
+			latLongPair = this.getGeocoding(venue2.getAddress());
+			venue2.setLatitude(latLongPair[0]);
+			venue2.setLongitude(latLongPair[1]);
+			venueService.save(venue2);
+
+			Venue venue3 = new Venue();
+			venue3.setName("Stopford Building");
+			venue3.setAddress("99 Oxford Rd, Manchester, M13 9PG");
+			venue3.setCapacity(75);
+			latLongPair = this.getGeocoding(venue3.getAddress());
+			venue3.setLatitude(latLongPair[0]);
+			venue3.setLongitude(latLongPair[1]);
+			venueService.save(venue3);
 			
 			Event event1 = new Event();
 			LocalDate date1 = LocalDate.of(2020, 05, 11);
@@ -109,14 +130,14 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			LocalTime time3 = LocalTime.of(11, 00);
 			event2.setDate(date1);
 			event2.setTime(time2);
-			event2.setVenue(venue1);
+			event2.setVenue(venue2);
 			event2.setName("COMP23412 Showcase, group H");
 			eventService.save(event2);
 			
 			Event event3 = new Event();
 			event3.setDate(date1);
 			event3.setTime(time3);
-			event3.setVenue(venue1);
+			event3.setVenue(venue3);
 			event3.setName("COMP23412 Showcase, group F");
 			eventService.save(event3);
 		}
