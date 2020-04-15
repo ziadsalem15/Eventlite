@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,17 +21,23 @@ public class Event {
 	@NotNull
 	@GeneratedValue
 	private long id;
-
+	
+	@Future(message="date must be in the future")
+	@NotNull(message="you must have a date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime time;
-
+	
+	@Size(max = 256, message = "The name must be <256 characters")
+	@NotEmpty(message = "you must enter a name")
 	private String name;
 	
+	@NotNull(message="you must enter a venue")
 	@ManyToOne
 	private Venue venue;
 	
