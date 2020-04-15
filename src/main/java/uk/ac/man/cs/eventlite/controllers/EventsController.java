@@ -87,5 +87,33 @@ public class EventsController {
 		model.addAttribute("event", event);
 		return "events/show";
 	}
+	
+	
+	@RequestMapping(value = "/newevent", method = RequestMethod.GET)
+	public String newEvent(Model model, HttpServletRequest request ) {
+		if(!model.containsAttribute("event")) {
+			model.addAttribute("event", new Event());
+		}
+
+		return "events/newevent";
+	}
+
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public String addEvent(@RequestBody @Valid @ModelAttribute Event event,
+			BindingResult errors, Model model, RedirectAttributes redirectAttrs) {
+
+		if (errors.hasErrors()) {
+			model.addAttribute("event", event);
+			//model.addAttribute("venues", venueService.findAll());
+			return "events/newevent";
+		}
+
+		eventService.save(event);
+		//redirectAttrs.addFlashAttribute("ok_message", "New event added.");
+		//model.addAttribute("events", eventService.findAll());
+		return "redirect:/events";
+	}
+	
+	
 
 }
