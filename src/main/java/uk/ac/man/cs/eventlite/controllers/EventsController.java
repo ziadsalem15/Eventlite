@@ -46,7 +46,7 @@ public class EventsController {
 			return "events/index";
 			}
 	}
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public String deleteEvent(@PathVariable("id") long id, Model model) {
 		eventService.deleteById(id);
 		
@@ -84,6 +84,6 @@ public class EventsController {
 		Optional<Event> event = eventService.findById(id);
 		model.addAttribute("event", event);
 		return "events/show";
-	}
-	
+		
+	}	
 }

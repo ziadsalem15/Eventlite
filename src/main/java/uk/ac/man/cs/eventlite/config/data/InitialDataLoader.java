@@ -44,6 +44,19 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			venue1.setCapacity(80);
 			venueService.save(venue1);
 			
+			Venue venue2 = new Venue();
+			venue2.setName("Kilburn LF31");
+			
+			venue2.setAddress("Oxford Rd, Manchester, M13 9PJ");
+			venue2.setCapacity(80);
+			venueService.save(venue2);
+			
+			Venue venue3 = new Venue();
+			venue3.setName("Kilburn Tootil 1");
+			venue3.setAddress("Oxford Rd, Manchester, M13 9PQ");
+			venue3.setCapacity(80);
+			venueService.save(venue3);
+			
 			Event event1 = new Event();
 			LocalDate date1 = LocalDate.of(2020, 05, 11);
 			LocalTime time1 = LocalTime.of(15, 00);
@@ -68,6 +81,20 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			event3.setVenue(venue1);
 			event3.setName("COMP23412 Showcase, group F");
 			eventService.save(event3);
+			
+			Event event4 = new Event();
+			event4.setDate(date1);
+			event4.setTime(time3);
+			event4.setVenue(venue2);
+			event4.setName("COMP23412 Showcase, group H");
+			eventService.save(event4);
+			
+			Event event5 = new Event();
+			event5.setDate(date1);
+			event5.setTime(time3);
+			event5.setVenue(venue3);
+			event5.setName("COMP23412 Showcase, group H");
+			eventService.save(event5);
 		}
 		// Build and save initial models here.
 

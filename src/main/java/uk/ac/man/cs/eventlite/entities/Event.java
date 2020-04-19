@@ -2,7 +2,6 @@ package uk.ac.man.cs.eventlite.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Optional;
 import javax.persistence.Entity;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
@@ -69,8 +68,8 @@ public class Event {
 		this.date = date;
 	}
 
-	public Optional<LocalTime> getTime() {
-		return Optional.ofNullable(time);
+	public LocalTime getTime() {
+		return time;
 	}
 
 	public void setTime(LocalTime time) {
@@ -92,4 +91,5 @@ public class Event {
 	public void setVenue(Venue venue) {
 		this.venue = venue;
 	}
+	
 }

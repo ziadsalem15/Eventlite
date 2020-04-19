@@ -3,10 +3,15 @@ package uk.ac.man.cs.eventlite.dao;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import uk.ac.man.cs.eventlite.entities.Venue;
+@SuppressWarnings("deprecation")
 
 @Service
 public class VenueServiceImpl implements VenueService {
@@ -35,5 +40,15 @@ public class VenueServiceImpl implements VenueService {
 	public Iterable<Venue> listVenueByName(String name){
 		return venueRepository.findByNameContainingOrderByNameAsc(name);
 	}
+	
+	@Override
+	public List<Venue> findTopVenues() 
+	{
+		Pageable limit = new PageRequest(0, 3);
+
+		return venueRepository.findTopVenues(limit);
+		
+	} // findTopVenues
+
 	
 }
