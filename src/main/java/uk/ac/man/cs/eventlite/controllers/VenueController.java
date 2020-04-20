@@ -50,6 +50,10 @@ public class VenueController {
 		Venue venue = venueService.getVenueByID(id);
 		model.addAttribute("venue",venue);
 		//need to implement helper function in venueService and venueService Implementation 
+		//need to implement a way to display event information related to venue
+		
+		//model.addAttribute("events", eventService.listEventsRelatedToAVenue(venue.getName()));
+		//need to implement helper function to list events related to a venue. 
 		
 		return "venues/venueDetails";
 	}
