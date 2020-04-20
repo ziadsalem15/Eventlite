@@ -34,9 +34,9 @@ public class VenueServiceImpl implements VenueService {
 	public Iterable<Venue> listVenueByName(String name){
 		return venueRepository.findByNameContainingOrderByNameAsc(name);
 	}
-	public Event getVenueByID(long id)
+	public Venue getVenueByID(long id)
 	{
-		Event event = eventRepository.findById(id).get();
-		return event;	
+		Venue venue = venueRepository.findById(id).get();
+		return venue;	
 	}
 }

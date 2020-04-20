@@ -1,5 +1,6 @@
 package uk.ac.man.cs.eventlite.dao;
 
+import uk.ac.man.cs.eventlite.entities.Event;
 import uk.ac.man.cs.eventlite.entities.Venue;
 
 public interface VenueService {
@@ -13,5 +14,7 @@ public interface VenueService {
 	public Iterable<Venue> sort();
 	
 	public Iterable<Venue> listVenueByName(String name);
+	
+	public Venue getVenueByID(long id);
 	
 }
