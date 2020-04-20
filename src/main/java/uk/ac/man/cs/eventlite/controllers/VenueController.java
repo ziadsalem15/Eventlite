@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import uk.ac.man.cs.eventlite.entities.Venue;
-
+import uk.ac.man.cs.eventlite.dao.EventService;
 @Controller
 @RequestMapping(value = "/venues", produces = { MediaType.TEXT_HTML_VALUE })
 public class VenueController {
 
 	@Autowired
 	private VenueService venueService;
+	private EventService eventService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAllVenues(Model model, @RequestParam (value="venuesearch", required= false) String search)  {
@@ -53,7 +53,7 @@ public class VenueController {
 		//need to implement helper function in venueService and venueService Implementation 
 		//need to implement a way to display event information related to venue
 		
-		//model.addAttribute("events", eventService.listEventsRelatedToAVenue(venue.getName()));
+		model.addAttribute("events", eventService.listEventsRelatedToAVenue(venue.getName()));
 		//need to implement helper function to list events related to a venue. 
 		
 		return "venues/venueDetails";

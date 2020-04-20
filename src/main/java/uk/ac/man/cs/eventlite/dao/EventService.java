@@ -19,5 +19,7 @@ public interface EventService {
 	
 	public Iterable<Event> sort();
 	
-	public Iterable<Event> listEventByName(String name);	
+	public Iterable<Event> listEventByName(String name);
+
+	Iterable<Event> listEventsRelatedToAVenue(String venue);	
 } 

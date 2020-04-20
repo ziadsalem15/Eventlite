@@ -1,6 +1,8 @@
 package uk.ac.man.cs.eventlite.dao;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private EventRepository eventRepository;
+	private VenueRepository venueRepository;
 
 	@Override
 	public long count() {
@@ -46,7 +49,18 @@ public class EventServiceImpl implements EventService {
 	
 	public Iterable<Event> listEventByName(String name){
 		return eventRepository.findByNameContainingOrderByDateAscNameAsc(name);
-	}
+		}
 
+	@Override
+	public Iterable<Event> listEventsRelatedToAVenue(String location) {
+		List<Event> events = new ArrayList<Event>();
+		for (Event event : findAll())
+			if (event.getVenue().getName().toLowerCase().contains(location.toLowerCase()))
+			{
+				events.add(event);
+			}    	
+		return events;
+	}
+	
 }
 
