@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,5 +41,17 @@ public class VenueController {
 
 		return "venues/show";
 	}**/
+	
+	//implementing the method to view all venu informations on a seperate page
+	//It should return a string with the details of the venue..
+	public String viewVenueDetails(Model model, @PathVariable long id)
+	{
+		//basic implementation creates a venue according to its id, and then adds attribute 
+		Venue venue = venueService.getVenueByID(id);
+		model.addAttribute("venue",venue);
+		//need to implement helper function in venueService and venueService Implementation 
+		
+		return "venues/venueDetails";
+	}
 
 }
