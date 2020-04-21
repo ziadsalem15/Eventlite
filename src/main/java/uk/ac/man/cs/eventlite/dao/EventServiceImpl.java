@@ -54,7 +54,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> findUpcoming3Events() {
 		LocalDate date = LocalDate.now();
-		return eventRepository.findAllByDateAfterOrderByDate(date);
+		return eventRepository.findAllByDateAfterOrderByDateAscTimeAsc(date);
 	} 
 	
 
