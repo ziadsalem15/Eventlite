@@ -10,19 +10,16 @@
     <h1>An event</h1>
     
       
-  <form th:text="@{/events/{num}(num=${id})}"></form>
-  
-  <td>
-  	<form th:object="${event}" th:action="@{/events/delete/{id}(id=${id})}" th:method="delete">
-    	<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
-    </form>
-  </td>
-  <br/>
-  <td>
-  	<form th:object="${event}" th:action="@{/events/update/{id}(id=${id})}">
-  		<button type="submit" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Update</button>
-  	</form>
-  </td>
+  	<form th:text="@{/events/{num}(num=${id})}"></form>
+  	<td>
+  		<form th:object="${event}" th:action="@{/events/update/{id}(id=${id})}">
+  			<button type="submit" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Update</button>
+  		</form>
+  		<br/>
+  		<form th:object="${event}" th:action="@{/events/delete/{id}(id=${id})}" th:method="delete">
+	    	<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+	  	</form>
+  	</td>
   </div>      
 </body>
 </html>

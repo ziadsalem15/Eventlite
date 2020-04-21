@@ -1,5 +1,7 @@
 package uk.ac.man.cs.eventlite.dao;
 
+import java.util.List;
+
 import uk.ac.man.cs.eventlite.entities.Venue;
 
 public interface VenueService {
@@ -13,5 +15,7 @@ public interface VenueService {
 	public Iterable<Venue> sort();
 	
 	public Iterable<Venue> listVenueByName(String name);
+	
+	public List<Venue> findTopUsedVenues();
 	
 }

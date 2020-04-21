@@ -2,7 +2,6 @@ package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,7 @@ import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 
 import uk.ac.man.cs.eventlite.entities.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 
 
 @Controller
@@ -77,8 +75,6 @@ public class EventsController {
 		return "redirect:/events";
 	}
 	
-
-	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String event(@PathVariable("id") long id,
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
@@ -86,6 +82,6 @@ public class EventsController {
 		Optional<Event> event = eventService.findById(id);
 		model.addAttribute("event", event);
 		return "events/show";
-	}
-
+		
+	}	
 }

@@ -140,6 +140,20 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			event3.setVenue(venue3);
 			event3.setName("COMP23412 Showcase, group F");
 			eventService.save(event3);
+			
+			Event event4 = new Event();
+			event4.setDate(date1);
+			event4.setTime(time3);
+			event4.setVenue(venue2);
+			event4.setName("COMP23412 Showcase, group H");
+			eventService.save(event4);
+			
+			Event event5 = new Event();
+			event5.setDate(date1);
+			event5.setTime(time3);
+			event5.setVenue(venue3);
+			event5.setName("COMP23412 Showcase, group H");
+			eventService.save(event5);
 		}
 		// Build and save initial models here.
 

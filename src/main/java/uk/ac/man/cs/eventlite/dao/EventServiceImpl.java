@@ -1,13 +1,17 @@
 package uk.ac.man.cs.eventlite.dao;
 
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 
 import uk.ac.man.cs.eventlite.entities.Event;
+
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -47,6 +51,12 @@ public class EventServiceImpl implements EventService {
 	public Iterable<Event> listEventByName(String name){
 		return eventRepository.findByNameContainingOrderByDateAscNameAsc(name);
 	}
+	@Override
+	public List<Event> findUpcoming3Events() {
+		LocalDate date = LocalDate.now();
+		return eventRepository.findAllByDateAfterOrderByDate(date);
+	} 
+	
 
 }
 
