@@ -29,7 +29,7 @@ public class HomeController {
 	public String event_(Model model) {
 
 		model.addAttribute("events", eventService.findUpcoming3Events());
-		model.addAttribute("venues", venueService.findTopVenues());
+		model.addAttribute("venues", venueService.findTopUsedVenues());
 		
 		return "../static/index";
 	}

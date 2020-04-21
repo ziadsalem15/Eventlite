@@ -2,7 +2,6 @@ package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,7 @@ import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 
 import uk.ac.man.cs.eventlite.entities.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 
 
 @Controller
@@ -46,7 +44,7 @@ public class EventsController {
 			return "events/index";
 			}
 	}
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
 	public String deleteEvent(@PathVariable("id") long id, Model model) {
 		eventService.deleteById(id);
 		

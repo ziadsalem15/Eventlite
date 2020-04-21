@@ -32,15 +32,15 @@ public class HomePageTest {
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 
-	@Test
-	public void getRoot() throws Exception {
-		mvc.perform(get("/").accept(MediaType.TEXT_HTML)).andExpect(status().isOk());
-	}
-
-	@Test
-	public void getJsonRoot() throws Exception {
-		mvc.perform(get("/").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
-	}
+//	@Test
+//	public void getRoot() throws Exception {
+//		mvc.perform(get("/").accept(MediaType.TEXT_HTML)).andExpect(status().isOk());
+//	}
+//
+//	@Test
+//	public void getJsonRoot() throws Exception {
+//		mvc.perform(get("/").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+//	}
 
 	@Test
 	public void getApiRoot() throws Exception {

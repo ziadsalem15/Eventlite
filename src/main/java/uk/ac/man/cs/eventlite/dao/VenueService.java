@@ -16,6 +16,6 @@ public interface VenueService {
 	
 	public Iterable<Venue> listVenueByName(String name);
 	
-	public List<Venue> findTopVenues();
+	public List<Venue> findTopUsedVenues();
 	
 }

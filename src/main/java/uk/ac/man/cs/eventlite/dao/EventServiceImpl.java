@@ -2,19 +2,16 @@ package uk.ac.man.cs.eventlite.dao;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 
 import uk.ac.man.cs.eventlite.entities.Event;
 
-@SuppressWarnings("deprecation")
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -57,9 +54,8 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> findUpcoming3Events() {
 		LocalDate date = LocalDate.now();
-			Pageable limit = new PageRequest(0, 3);
-			return eventRepository.findAllByDateAfterOrderByDate(date, limit);
-	} // findUpcomingEvents
+		return eventRepository.findAllByDateAfterOrderByDate(date);
+	} 
 	
 
 }
