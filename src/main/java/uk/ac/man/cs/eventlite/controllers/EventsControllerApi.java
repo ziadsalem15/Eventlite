@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.ac.man.cs.eventlite.dao.EventService;
@@ -49,6 +50,12 @@ public class EventsControllerApi {
 		}
 
 		return new Resources<Resource<Event>>(resources, selfLink);
+	}
+	
+	//@RequestParam(value = "tweetText") String statusMsg
+	@RequestMapping(value = "/tweet", method = RequestMethod.POST)
+	public ResponseEntity<Event> tweet() {
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

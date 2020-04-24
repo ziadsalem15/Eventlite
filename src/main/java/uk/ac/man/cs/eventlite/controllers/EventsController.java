@@ -2,6 +2,7 @@ package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
-
-import uk.ac.man.cs.eventlite.entities.*;
-
-
+import uk.ac.man.cs.eventlite.entities.Event;
 
 @Controller
 @RequestMapping(value = "/events", produces = { MediaType.TEXT_HTML_VALUE })
@@ -44,12 +46,25 @@ public class EventsController {
 			return "events/index";
 			}
 	}
+	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
 	public String deleteEvent(@PathVariable("id") long id, Model model) {
 		eventService.deleteById(id);
 		
 		return "redirect:/events";
 	}
+	
+	@RequestMapping(value = "/tweet", method = RequestMethod.POST)
+	public String tweet(Model model, HttpServletRequest request) {
+		Twitter twitter = TwitterFactory.getSingleton();
+		try {
+			Status status = twitter.updateStatus(request.getParameter("tweetMsg"));
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+		return "events/show";
+	}
+	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String getEvent(Model model, @PathVariable("id") long id) {
 		Event event = eventService.findById(id).get();
@@ -57,8 +72,6 @@ public class EventsController {
 		model.addAttribute("venues", venueService.findAll());
 		return "events/update";
 	} 
-	
-	
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String updateTheEvent(@PathVariable("id") long id,
@@ -82,6 +95,5 @@ public class EventsController {
 		Optional<Event> event = eventService.findById(id);
 		model.addAttribute("event", event);
 		return "events/show";
-		
 	}	
 }
