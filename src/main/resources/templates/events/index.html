@@ -3,10 +3,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default}">
 <head>
-  <title>All events</title>
+	<meta charset=utf-8 />
+  	<title>All events</title>
+  	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<script src='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.css' rel='stylesheet' />
+	<style>
+  		#map { position:absolute; top:500px; bottom:50px; width:66%; }
+	</style>
 </head>
 <body>
   <div layout:fragment="content">
+  <div id='table'></div>
     <h1>All events</h1>
 
     <table class="table table-striped table-hover">
@@ -33,7 +41,15 @@
         </tr>
       </tbody>
     </table>
-
+	<div id='map'></div>
+	<h1> A Simple Map </h1>
+	<script>
+		L.mapbox.accessToken = "pk.eyJ1IjoiZ3JvdXAtaDEzIiwiYSI6ImNrOGZ4dXdxbTAwaTgzZ3A3ZDg5NjR0a2IifQ.zJHpLl4QfI0v-AR9mbSGcw";
+		var map = L.mapbox.map('map')
+	    .setView([40, -74.50], 9)
+	    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+	</script>
+	</div>
   </div>
 
 </body>
