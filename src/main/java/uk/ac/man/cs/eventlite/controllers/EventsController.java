@@ -22,6 +22,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import uk.ac.man.cs.eventlite.entities.Event;
@@ -30,6 +31,11 @@ import uk.ac.man.cs.eventlite.entities.Event;
 @RequestMapping(value = "/events", produces = { MediaType.TEXT_HTML_VALUE })
 public class EventsController {
 
+	private static final String CONSUMER_KEY = "VPqSlzWEL9sdHnCYxbhCqsjrd";
+	private static final String CONSUMER_SECRET = "VdgY81RyxNL0BjD9Ciqu3mF6CIfd0yP7ggeELc0XdBDb931sp3";
+	private static final String ACCESS_KEY = "1252219375433781248-aLIfXPRbvlRVEOSRlGdc3CkYJQLtTs";
+	private static final String ACCESS_SECRET = "bOji6K257zHlg0zHSEp90WW8G6ziD34JUsHxiOAWU8Wa5";
+	
 	@Autowired
 	private EventService eventService;
 
@@ -56,7 +62,15 @@ public class EventsController {
 	
 	@RequestMapping(value = "/tweet", method = RequestMethod.POST)
 	public String tweet(Model model, HttpServletRequest request) {
-		Twitter twitter = TwitterFactory.getSingleton();
+		ConfigurationBuilder config = new ConfigurationBuilder();
+		config.setDebugEnabled(true);
+		config.setOAuthConsumerKey(CONSUMER_KEY);
+		config.setOAuthConsumerSecret(CONSUMER_SECRET);
+		config.setOAuthAccessToken(ACCESS_KEY);
+		config.setOAuthAccessTokenSecret(ACCESS_SECRET);
+		
+		TwitterFactory factory = new TwitterFactory(config.build());
+		Twitter twitter = factory.getInstance();
 		try {
 			Status status = twitter.updateStatus(request.getParameter("tweetMsg"));
 		} catch (TwitterException e) {
