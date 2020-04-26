@@ -60,8 +60,8 @@ public class EventsController {
 		return "redirect:/events";
 	}
 	
-	@RequestMapping(value = "/tweet", method = RequestMethod.POST)
-	public String tweet(Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/tweet/{id}", method = RequestMethod.POST)
+	public String tweet(Model model, HttpServletRequest request, @PathVariable("id") long id) {
 		ConfigurationBuilder config = new ConfigurationBuilder();
 		config.setDebugEnabled(true);
 		config.setOAuthConsumerKey(CONSUMER_KEY);
@@ -72,7 +72,7 @@ public class EventsController {
 		TwitterFactory factory = new TwitterFactory(config.build());
 		Twitter twitter = factory.getInstance();
 		try {
-			Status status = twitter.updateStatus(request.getParameter("tweetMsg"));
+			Status status = twitter.updateStatus(request.getParameter("tweetMsg") + " http://localhost:8080/events/" + id);
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}

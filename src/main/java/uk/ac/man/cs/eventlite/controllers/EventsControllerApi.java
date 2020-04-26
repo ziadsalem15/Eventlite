@@ -53,8 +53,8 @@ public class EventsControllerApi {
 	}
 	
 	//@RequestParam(value = "tweetText") String statusMsg
-	@RequestMapping(value = "/tweet", method = RequestMethod.POST)
-	public ResponseEntity<Event> tweet() {
+	@RequestMapping(value = "/tweet/{id}", method = RequestMethod.POST)
+	public ResponseEntity<Event> tweet(@PathVariable("id") long id) {
 		return ResponseEntity.noContent().build();
 	}
 	

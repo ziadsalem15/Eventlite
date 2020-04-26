@@ -13,7 +13,7 @@
   	<form th:text="@{/events/{num}(num=${id})}"></form>
   	<td>
 	    <h5><b>Share this event on Twitter!</b></h5>
-	    <form th:action="@{/events/tweet}" th:object="${event}" method="post">
+	    <form th:action="@{/events/tweet/{id}(id=${id})}" th:object="${event}" method="post">
 	    	<input type="text" id="tweet" name="tweetMsg" placeholder="Write a Tweet" required/>
 	    	<button type="submit" class="btn btn-primary" href="/events/tweet"><i class="fa fa-twitter" aria-hidden="true"></i> Tweet</button>
 	    </form>
