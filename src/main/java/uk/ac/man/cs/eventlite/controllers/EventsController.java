@@ -77,6 +77,9 @@ public class EventsController {
 			Status status = twitter.updateStatus(request.getParameter("tweetMsg") + " http://localhost:8080/events/" + id);
 			System.out.println("Succesful");
 			System.out.println(request.getParameter("tweetMsg").length());
+			 model.addAttribute("success", true);
+			 String tweetMsg = request.getParameter("tweetMsg");
+			 model.addAttribute("tweetMsg", tweetMsg);
 			}
 			else
 			{

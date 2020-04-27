@@ -16,6 +16,10 @@
 	    <form th:action="@{/events/tweet/{id}(id=${id})}" th:object="${event}" method="post">
 	    	<input type="text" id="tweet" name="tweetMsg" placeholder="Write a Tweet" required/>
 	    	<button type="submit" class="btn btn-primary" href="/events/tweet"><i class="fa fa-twitter" aria-hidden="true"></i> Tweet</button>
+	    	<span th:if="${success}"><br>Last Tweet was:  </span>
+	    	<br>
+	    	<span th:inline="text">[[${tweetMsg}]]</span>
+	    	
 	    </form>
 	    
 	    <br/>
