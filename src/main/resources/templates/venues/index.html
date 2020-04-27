@@ -17,8 +17,10 @@
           <th><i class="fas fa-map-marker-alt"></i> Address</th>
         </tr>
       </thead>
+     <a class="btn btn-primary" role="button" th:href="@{/venues/newvenue}"><i>New Venue</i></a>
       
       <form th:object="${venue}" action="/venues" method="get">
+      
       <input type="text" name = "venuesearch" th:value="${venuesearch}" id = "venuesearch"/>
       <input type ="submit" value = "Search..">
       </form>
