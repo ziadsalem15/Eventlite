@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
+import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import uk.ac.man.cs.eventlite.entities.Event;
@@ -46,6 +48,37 @@ public class EventsController {
 	public String getAllEvents(Model model, @RequestParam (value = "search", required = false) String search) {
 			if (search == null) {
 				model.addAttribute("events", eventService.sort());
+				try
+				{
+					// gets Twitter instance with default credentials
+					ConfigurationBuilder config = new ConfigurationBuilder();
+					config.setDebugEnabled(true);
+					config.setOAuthConsumerKey(CONSUMER_KEY);
+					config.setOAuthConsumerSecret(CONSUMER_SECRET);
+					config.setOAuthAccessToken(ACCESS_KEY);
+					config.setOAuthAccessTokenSecret(ACCESS_SECRET);
+					
+					TwitterFactory factory = new TwitterFactory(config.build());
+					Twitter twitter = factory.getInstance();
+					//List<Tweet> tweets = twitter.timelineOperations().getUserTimeline(5);
+
+		            List<Status> statuses = twitter.getHomeTimeline();
+					Map<String, String> tweetContents = new LinkedHashMap<String, String>();
+					for (Status status : statuses) 
+					{
+						tweetContents.put(status.getCreatedAt().toString(), status.getText());
+			                //model.addAttribute("status", status.getText());
+			        }
+	
+					model.addAttribute("tweetContents", tweetContents);
+		        }
+				catch (TwitterException te) 
+				{
+		            te.printStackTrace();
+		            System.out.println("Failed to get timeline: " + te.getMessage());
+		            System.exit(-1);
+		        }
+				
 				return "events/index";
 			} else {
 			model.addAttribute("events", eventService.listEventByName(search));
@@ -72,7 +105,7 @@ public class EventsController {
 		TwitterFactory factory = new TwitterFactory(config.build());
 		Twitter twitter = factory.getInstance();
 		try {
-			Status status = twitter.updateStatus(request.getParameter("tweetMsg") + " http://localhost:8080/events/" + id);
+			Status status = twitter.updateStatus(request.getParameter("tweetMsg"));
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}

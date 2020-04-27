@@ -9,8 +9,19 @@
 	<script src='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.js'></script>
 	<link href='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.css' rel='stylesheet' />
 	<style>
-  		#map { position:absolute; top:500px; bottom:50px; width:66%; }
+		 body {
+            margin: 0;
+            padding: 0;
+        }
+        
+	  	#map { position:relative;  bottom: 20px; height: 400px;
+            width: 100%;}
+        
+        * {
+            box-sizing: border-box;
+        }
 	</style>
+	
 </head>
 <body>
   <div layout:fragment="content">
@@ -27,7 +38,6 @@
         </tr>
       </thead>
       <a class="btn btn-primary" role="button" th:href="@{/events/newevent}"><i>Add Event</i></a>
-      
       <form th:object="${event}" action="/events" method="get">
       <input type="text" name = "search" th:value="${search}" id = "search"/>
       <input type ="submit" value = "Search..">
@@ -43,8 +53,26 @@
         </tr>
       </tbody>
     </table>
+    <br>
+    <h3> Twitter Feed </h3>
+    <table style="overflow:auto;" class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th><i  class="fas fa-calendar"></i> Date</th>
+	      <th><i class="fab fa-twitter"></i></th>
+        </tr>
+      </thead>
+      <tbody>      
+        <tr th:each="t : ${tweetContents}">
+         <td style="white-space: nowrap;"th:text="${t.key}">Date</td>
+         <td style="white-space: nowrap;" th:text="${t.value}">Tweet</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <div class="box">
 	<div id='map'></div>
-	<h1> A Simple Map </h1>
 	<script>
 		L.mapbox.accessToken = "pk.eyJ1IjoiZ3JvdXAtaDEzIiwiYSI6ImNrOGZ4dXdxbTAwaTgzZ3A3ZDg5NjR0a2IifQ.zJHpLl4QfI0v-AR9mbSGcw";
 		var map = L.mapbox.map('map')
