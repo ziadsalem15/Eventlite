@@ -26,6 +26,8 @@
           <th><i class="fas fa-clock"></i> Time</th>
         </tr>
       </thead>
+      <a class="btn btn-primary" role="button" th:href="@{/events/newevent}"><i>Add Event</i></a>
+      
       <form th:object="${event}" action="/events" method="get">
       <input type="text" name = "search" th:value="${search}" id = "search"/>
       <input type ="submit" value = "Search..">
