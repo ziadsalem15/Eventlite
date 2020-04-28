@@ -63,7 +63,7 @@
         </tr>
       </thead>
       <tbody>      
-        <tr th:each="t : ${tweetContents}">
+        <tr th:each="t, pStat: ${tweetContents}" th:unless="${pStat.index > 4}">
          <td style="white-space: nowrap;"th:text="${t.key}">Date</td>
          <td style="white-space: nowrap;" th:text="${t.value}">Tweet</td>
         </tr>
