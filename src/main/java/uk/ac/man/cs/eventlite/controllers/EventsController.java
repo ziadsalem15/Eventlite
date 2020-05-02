@@ -21,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,7 @@ import java.util.Map;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import uk.ac.man.cs.eventlite.entities.Event;
+import uk.ac.man.cs.eventlite.entities.Venue;
 
 @Controller
 @RequestMapping(value = "/events", produces = { MediaType.TEXT_HTML_VALUE })
@@ -146,27 +149,25 @@ public class EventsController {
 	
 	@RequestMapping(value = "/newevent", method = RequestMethod.GET)
 	public String newEvent(Model model, HttpServletRequest request ) {
-		if(!model.containsAttribute("event")) {
-			model.addAttribute("event", new Event());
-		}
+		
+		model.addAttribute("venues", venueService.findAll());
 
 		return "events/newevent";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String addEvent(@RequestBody @Valid @ModelAttribute Event event,
-			BindingResult errors, Model model, RedirectAttributes redirectAttrs) {
+	@RequestMapping(value = "/newevent", method = RequestMethod.POST)
+	public String addEvent(Model model, @RequestBody @Valid @ModelAttribute Event event, RedirectAttributes redirectAttrs, BindingResult errors) {
 
 		if (errors.hasErrors()) {
-			model.addAttribute("event", event);
-			//model.addAttribute("venues", venueService.findAll());
+			model.addAttribute("addEvent", event);
 			return "events/newevent";
 		}
 
 		eventService.save(event);
-		//redirectAttrs.addFlashAttribute("ok_message", "New event added.");
-		//model.addAttribute("events", eventService.findAll());
+		redirectAttrs.addFlashAttribute("ok_message", "The event is added");
+		model.addAttribute("events", eventService.findAll());
 		return "redirect:/events";
+		
 	}
 
 	
