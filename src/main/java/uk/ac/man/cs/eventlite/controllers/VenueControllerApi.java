@@ -12,11 +12,14 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
+import uk.ac.man.cs.eventlite.entities.Event;
 import uk.ac.man.cs.eventlite.entities.Venue;
 
 @RestController
@@ -25,6 +28,8 @@ public class VenueControllerApi {
 
 	@Autowired
 	private VenueService venueService;
+	@Autowired
+	private EventService eventService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public Resources<Resource<Venue>> getAllVenues() {
@@ -53,4 +58,35 @@ public class VenueControllerApi {
 	public ResponseEntity<Venue> deleteEvent(@PathVariable("id") long id) {
 		return ResponseEntity.noContent().build();
 	}**/
+	
+	private Resource<Event> eventToResource(Event event) {
+		Link selfLink = linkTo(EventsControllerApi.class).slash(event.getId()).withSelfRel();
+
+		return new Resource<Event>(event, selfLink);
+	}
+	
+	
+	private Resources<Resource<Event>> eventToResource(Iterable<Event> events, long id) {
+		Link selfLink = linkTo(methodOn(VenueControllerApi.class).get3Events(id)).withSelfRel();
+
+		List<Resource<Event>> resources = new ArrayList<Resource<Event>>();
+		int eventno = 0;
+		for (Event event : events) {
+			if(eventno<3 && event.getVenue().getId() == id ) {
+				resources.add(eventToResource(event));
+				eventno = eventno + 1;
+			}
+				
+		}
+		return new Resources<Resource<Event>>(resources, selfLink);
+	
+}
+	
+	
+	
+	@RequestMapping(value = "/{id}/next3events", method=RequestMethod.GET)
+	public Resources<Resource<Event>> get3Events(@PathVariable("id") long id) {
+		return eventToResource(eventService.findAll(), id);
+	}
+
 }
