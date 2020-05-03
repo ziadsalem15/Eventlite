@@ -29,6 +29,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 
 import uk.ac.man.cs.eventlite.EventLite;
 import uk.ac.man.cs.eventlite.dao.EventService;
@@ -59,9 +60,12 @@ public class EventsControllerTest {
 
 	@Mock
 	private VenueService venueService;
+	@Mock
+	private Model model;
 
 	@InjectMocks
 	private EventsController eventsController;
+	
 
 	@BeforeEach
 	public void setup() {
@@ -69,7 +73,12 @@ public class EventsControllerTest {
 		mvc = MockMvcBuilders.standaloneSetup(eventsController).apply(springSecurity(springSecurityFilterChain))
 				.build();
 	}
-
+	
+	@Test
+	public void checkNewEventPageWorks() throws Exception {
+		mvc.perform(get("/events/newevent").accept(MediaType.TEXT_HTML))
+		.andExpect(status().isOk()).andExpect(view().name("events/newevent"));
+	}
 	@Test
 	public void getIndexWhenNoEvents() throws Exception {
 		when(eventService.sort()).thenReturn(Collections.<Event> emptyList());
@@ -85,7 +94,6 @@ public class EventsControllerTest {
 		verifyZeroInteractions(event);
 		verifyZeroInteractions(venue);
 	}
-
 	@Test
 	public void getIndexWithEvents() throws Exception {
 		when(eventService.sort()).thenReturn(Collections.<Event> singletonList(event));
@@ -101,4 +109,5 @@ public class EventsControllerTest {
 		verifyZeroInteractions(event);
 		verifyZeroInteractions(venue);
 	}
+	
 }
