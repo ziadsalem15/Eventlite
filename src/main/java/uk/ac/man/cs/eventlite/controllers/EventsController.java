@@ -108,7 +108,14 @@ public class EventsController {
 		TwitterFactory factory = new TwitterFactory(config.build());
 		Twitter twitter = factory.getInstance();
 		try {
+			if(request.getParameter("tweetMsg").length() <= 280)
+			{
 			Status status = twitter.updateStatus(request.getParameter("tweetMsg"));
+			}
+			else
+			{
+				return "events/tweetfailure";
+			}
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
