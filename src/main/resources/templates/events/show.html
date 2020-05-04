@@ -15,15 +15,20 @@
 </head>
 <body>
   <div layout:fragment="content">
-    <h1>An event</h1>
-      
-  	<form th:text="@{/events/{num}(num=${id})}"></form>
-  	<td>
-	    <h5><b>Share this event on Twitter!</b></h5>
+ 	<div> </br>
+ 	<h1><a th:text ="${event.name}" </a> </h1>
+ 	<h3>Venue: </h3><p></p> <h4><span style="font-weight:normal;"><a th:text ="${(event.venue).name}" </a></h4> </span>
+ 	<h3>Date:</h3><p></p><h4><span style="font-weight:normal;"><a th:text = "${event.date}"> </a>  </h4> </span>
+ 	<h3>Time:</h3><p></p><h4><span style="font-weight:normal;"><a th:text = "${event.time}"> </a> </h4> </span>
+ 	<h4>Description</h4>This event is a show case for the COMP23412 Module!   
+ 	<h5><b>Share this event on Twitter!</b></h5>
 	    <form th:action="@{/events/tweet/{id}(id=${id})}" th:object="${event}" method="post">
 	    	<input type="text" id="tweet" name="tweetMsg" placeholder="Write a Tweet" required/>
 	    	<button type="submit" class="btn btn-primary" href="/events/tweet"><i class="fa fa-twitter" aria-hidden="true"></i> Tweet</button>
 	    </form>
+	</div> <p></p>
+  	<td>
+
 	    
 	    <br/>
   		<form th:object="${event}" th:action="@{/events/update/{id}(id=${id})}">

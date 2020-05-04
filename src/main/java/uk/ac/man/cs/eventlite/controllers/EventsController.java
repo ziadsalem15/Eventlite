@@ -105,6 +105,9 @@ public class EventsController {
 		config.setOAuthAccessToken(ACCESS_KEY);
 		config.setOAuthAccessTokenSecret(ACCESS_SECRET);
 		
+		Event event = eventService.findById(id).get();
+		model.addAttribute("event", event);
+		
 		TwitterFactory factory = new TwitterFactory(config.build());
 		Twitter twitter = factory.getInstance();
 		try {
@@ -147,6 +150,14 @@ public class EventsController {
 		return "events/show";
 	}	
 	
+	@RequestMapping(value = "/events/{id}", method = RequestMethod.GET)
+	public String getSpecificEvent(Model model, @PathVariable("id") long id) {
+		Event event = eventService.findById(id).get();
+		
+		model.addAttribute("event", event);
+		return "events/show";
+	}
+	
 	@RequestMapping(value = "/newevent", method = RequestMethod.GET)
 	public String newEvent(Model model, HttpServletRequest request ) {
 		
@@ -169,8 +180,6 @@ public class EventsController {
 		return "redirect:/events";
 		
 	}
-
-	
 	
 	
 	
