@@ -1,6 +1,7 @@
 package uk.ac.man.cs.eventlite.controllers;
 
-import java.util.Optional;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -18,22 +19,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import twitter4j.*;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import uk.ac.man.cs.eventlite.entities.Event;
-import uk.ac.man.cs.eventlite.entities.Venue;
+import uk.ac.man.cs.eventlite.entities.Tweet;
+
+
+
 
 @Controller
 @RequestMapping(value = "/events", produces = { MediaType.TEXT_HTML_VALUE })
+@SuppressWarnings("unused")
+
 public class EventsController {
 
 	private static final String CONSUMER_KEY = "VPqSlzWEL9sdHnCYxbhCqsjrd";
@@ -63,17 +65,20 @@ public class EventsController {
 					
 					TwitterFactory factory = new TwitterFactory(config.build());
 					Twitter twitter = factory.getInstance();
-					//List<Tweet> tweets = twitter.timelineOperations().getUserTimeline(5);
 
 		            List<Status> statuses = twitter.getHomeTimeline();
-					Map<String, String> tweetContents = new LinkedHashMap<String, String>();
+					List<Tweet> tweets = new LinkedList<Tweet>();
 					for (Status status : statuses) 
 					{
-						tweetContents.put(status.getCreatedAt().toString(), status.getText());
-			                //model.addAttribute("status", status.getText());
-			        }
-	
-					model.addAttribute("tweetContents", tweetContents);
+						Tweet tweet = new Tweet();
+						String url= "https://twitter.com/" + status.getUser().getScreenName() 
+							    + "/status/" + status.getId();
+						tweet.setDate(status.getCreatedAt().toString());
+						tweet.setTweet(status.getText());
+						tweet.setURL(url);
+						tweets.add(tweet);
+			        }					
+					model.addAttribute("tweets", tweets);
 		        }
 				catch (TwitterException te) 
 				{
@@ -169,10 +174,5 @@ public class EventsController {
 		return "redirect:/events";
 		
 	}
-
-	
-	
-	
-	
 	
 }

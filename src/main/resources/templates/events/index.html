@@ -63,9 +63,11 @@
         </tr>
       </thead>
       <tbody>      
-        <tr th:each="t, pStat: ${tweetContents}" th:unless="${pStat.index > 4}">
-         <td style="white-space: nowrap;"th:text="${t.key}">Date</td>
-         <td style="white-space: nowrap;" th:text="${t.value}">Tweet</td>
+        <tr th:each="t, pStat: ${tweets}" th:unless="${pStat.index > 4}">
+         <td style="white-space: nowrap;"th:text="${t.date}">Date</td>
+         <td style="white-space: nowrap;">
+         	<a th:href="${t.url}" th:text="${t.tweet}">Tweet</a>
+         </td>
         </tr>
       </tbody>
     </table>
