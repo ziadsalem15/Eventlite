@@ -42,6 +42,8 @@ public class Event {
 	@NotNull(message = "Venue may not be null")
 	private Venue venue;
 	
+	private String desc;
+	
 	public Event(long id, LocalDate date, LocalTime time, String name, Venue venue)
 	{
 		this.id = id;
@@ -49,6 +51,7 @@ public class Event {
 		this.time = time;
 		this.name = name;
 		this.venue = venue;
+		this.desc = desc;
 	}
 	
 	public Event() {}
@@ -91,5 +94,13 @@ public class Event {
 
 	public void setVenue(Venue venue) {
 		this.venue = venue;
+	}
+	
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	
+	public String getDesc() {
+		return desc;
 	}
 }

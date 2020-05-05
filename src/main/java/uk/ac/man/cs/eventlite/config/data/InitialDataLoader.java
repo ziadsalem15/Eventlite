@@ -123,6 +123,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			event1.setDate(date1);
 			event1.setTime(time1);
 			event1.setVenue(venue1);
+			event1.setDesc("This is the Showcase where group G in COMP23412 will show the work they've done.");
 			eventService.save(event1);
 			
 			Event event2 = new Event();
@@ -132,6 +133,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			event2.setTime(time2);
 			event2.setVenue(venue2);
 			event2.setName("COMP23412 Showcase, group H");
+			event2.setDesc("This is the Showcase where group H in COMP23412 will show the work they've done.");
+
 			eventService.save(event2);
 			
 			Event event3 = new Event();
@@ -139,20 +142,26 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			event3.setTime(time3);
 			event3.setVenue(venue3);
 			event3.setName("COMP23412 Showcase, group F");
+			event3.setDesc("This is the Showcase where group F in COMP23412 will show the work they've done.");
+
 			eventService.save(event3);
 			
 			Event event4 = new Event();
 			event4.setDate(date1);
 			event4.setTime(time3);
 			event4.setVenue(venue2);
-			event4.setName("COMP23412 Showcase, group H");
+			event4.setName("COMP23412 Showcase, group U");
+			event4.setDesc("This is the Showcase where group U in COMP23412 will show the work they've done.");
+
 			eventService.save(event4);
 			
 			Event event5 = new Event();
 			event5.setDate(date1);
 			event5.setTime(time3);
 			event5.setVenue(venue3);
-			event5.setName("COMP23412 Showcase, group H");
+			event5.setName("COMP23412 Showcase, group D");
+			event5.setDesc("This is the Showcase where group D in COMP23412 will show the work they've done.");
+
 			eventService.save(event5);
 		}
 		// Build and save initial models here.
