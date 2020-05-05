@@ -159,8 +159,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 			event5.setDate(date1);
 			event5.setTime(time3);
 			event5.setVenue(venue3);
-			event5.setName("COMP23412 Showcase, group D");
-			event5.setDesc("This is the Showcase where group D in COMP23412 will show the work they've done.");
+			event5.setName("COMP23412 Showcase, group P");
+			event5.setDesc("This is the Showcase where group P in COMP23412 will show the work they've done.");
 
 			eventService.save(event5);
 		}

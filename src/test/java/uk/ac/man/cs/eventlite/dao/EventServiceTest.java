@@ -59,4 +59,22 @@ public class EventServiceTest extends AbstractTransactionalJUnit4SpringContextTe
 		assertThat("Count should be +1 because we added an event.", (count + 1), equalTo(eventService.count()));
 		assertThat("There should be non-zero event_id.", 0L, not(equalTo(event.getId())));
 	}
+	
+	@Test
+	public void searchEvent() {
+		
+		String eventName = "Iron Bru";
+		
+		Event event = new Event();
+		event.setName(eventName);
+		eventService.save(event);
+		long eventID = event.getId();
+		
+		Iterable<Event> searchResult = eventService.listEventByName(eventName);
+		
+		Event groupH = searchResult.iterator().next();
+				
+		assertThat("The event name we found using our search function and the name of the event should be the same", groupH.getName(), equalTo(eventName));
+		
+	}
 }
