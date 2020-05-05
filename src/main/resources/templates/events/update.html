@@ -36,7 +36,7 @@
 		  *Required
 		  </small><br><br>
 		  <label for="name"><b>Description</b></label><br>
-		  <textarea class="form-control" name="description" placeholder="event description" th:value"${addEvent.desc}"></textarea><br>
+		  <input type="text" class="form-control" name="desc" id="desc" placeholder="event description" th:value"${updateEvent.desc}"/><br>
 		  <br/><br/>
 		  <input type="submit" id="submit" name="submit" autofocus="autofocus" th:value"$(submit)" /> </th>
 		  <input type="reset" id="reset" name="reset" autofocus="autofocus" th:value"$(reset)" /> </th>
