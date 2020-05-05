@@ -48,6 +48,7 @@
 
     var latitude = /*[[${event.venue.latitude}]]*/;
     var longitude = /*[[${event.venue.longitude}]]*/;
+    var name = /*[[${event.name}]]*/;
 
    
 /*]]>*/
@@ -58,13 +59,7 @@ var map = L.mapbox.map('map')
     .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 // L.marker is a low-level marker constructor in Leaflet.
-L.marker([latitude, longitude], {
-    icon: L.mapbox.marker.icon({
-        'marker-size': 'large',
-        'marker-symbol': 'bus',
-        'marker-color': '#fa0'
-    })
-}).addTo(map);
+L.marker([latitude, longitude]).bindPopup(name).addTo(map);
 </script>
 </div>
   	
