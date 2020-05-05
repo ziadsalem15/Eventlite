@@ -14,9 +14,15 @@
 	<br/>
   	  <label for="name"><b>Event Name</b></label><br>
 	  <input type="text" id="name" name="name" th:value"${addEvent.name}" required/> </th><br>
+	  <small id="nameHelpInline" class="text-muted">
+	  *Required: Name must be less than 256 characters!
+	  </small><br>
 	  <br/>
 	  <label for="name"><b>Date</b></label><br>
 	  <input type="date" id="date" name="date" th:value"${addEvent.date}" required/> </th><br>
+	  <small id="nameHelpInline" class="text-muted">
+	  *Required: Date must be in the future!
+	  </small><br>
 	  <br/>
 	  <label for="name"><b>Time</b></label><br>
 	  <input type="time" id="time" name="time" th:value"${addEvent.time}"/> </th><br>
@@ -25,7 +31,11 @@
 	  <select id="venue" name="venue">
 	  	<option label=" "></option>
 	  	<option th:each="v : ${venues}" th:value="${v.id}" th:text="${v.name}" required/>
-	  </select>		 
+	  </select>		
+	  <br/>	 
+	  <small id="nameHelpInline" class="text-muted">
+	  *Required
+	  </small><br>
 	  <br/><br/>
 	  <input type="submit" id="submit" name="submit" autofocus="autofocus" th:value"$(submit)" /> </th>
 	  <input type="reset" id="reset" name="reset" autofocus="autofocus" th:value"$(reset)" /> </th>

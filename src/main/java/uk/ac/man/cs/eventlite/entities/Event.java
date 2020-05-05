@@ -2,6 +2,7 @@ package uk.ac.man.cs.eventlite.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 import javax.persistence.Entity;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
@@ -23,8 +24,8 @@ public class Event {
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Future
 	@NotNull(message = "Date may not be null")
+	@Future
 	private LocalDate date;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -91,5 +92,4 @@ public class Event {
 	public void setVenue(Venue venue) {
 		this.venue = venue;
 	}
-	
 }
