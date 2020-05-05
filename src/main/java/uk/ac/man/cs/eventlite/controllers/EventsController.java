@@ -1,5 +1,6 @@
 package uk.ac.man.cs.eventlite.controllers;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -131,7 +132,9 @@ public class EventsController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String updateTheEvent(@PathVariable("id") long id,
 			Model model, @RequestBody @Valid @ModelAttribute Event event, RedirectAttributes redirectAttrs, BindingResult errors) {
-
+		
+		
+		
 		if (errors.hasErrors()) {
 			model.addAttribute("updateEvent", event);
 			return "events/update";
