@@ -41,6 +41,7 @@ import org.mockito.internal.verification.VerificationModeFactory;
 
 import uk.ac.man.cs.eventlite.EventLite;
 import uk.ac.man.cs.eventlite.dao.VenueService;
+import uk.ac.man.cs.eventlite.entities.Event;
 import uk.ac.man.cs.eventlite.entities.Venue;
 
 @ExtendWith(SpringExtension.class)
@@ -93,8 +94,29 @@ class VenueControllerAPITest {
 			.andExpect(handler().methodName("getAllVenues")).andExpect(jsonPath("$.length()", equalTo(3)))
 			.andExpect(jsonPath("$._links.self.href", endsWith("/api/venues")));
 
-		verify(venueService).findAll();
+		verify(venueService).findAll(); 
 
 	}
-
+	@Test
+	public void checkIfGet3EventsWorks() throws Exception {
+		Venue venue = new Venue();
+		venue.setId(0);
+		Event event = new Event();
+		event.setVenue(venue);
+		Event event_2 = new Event();
+		event_2.setVenue(venue);
+		Event event_3 = new Event();
+		event_3.setVenue(venue);
+		Event event_4 = new Event();
+		event_4.setVenue(venue);
+		
+		//verify(venueController.get3Events(0));
+		int counter = 0;
+		for (Object i :venueController.get3Events(0) ) {
+		    counter++;
+		}
+		System.out.println("Number : " + counter);
+		assertEquals(3,counter);
+		
+	}
 }
