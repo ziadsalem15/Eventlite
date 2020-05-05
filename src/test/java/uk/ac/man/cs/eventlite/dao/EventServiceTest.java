@@ -67,7 +67,6 @@ public class EventServiceTest extends AbstractTransactionalJUnit4SpringContextTe
 		
 		Event event = new Event();
 		event.setName(eventName);
-		event.setId(9);
 		eventService.save(event);
 		long eventID = event.getId();
 		
