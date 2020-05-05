@@ -70,12 +70,27 @@ class VenueControllerAPITest {
 	}
 	@Test
 	@WithMockUser(username = {"Mustafa"},password = {"mustafa"},roles = {"ADMINISTRATOR"})
-	public void getIndexWhenNoVenuesAsAdmin() throws Exception {
+	public void checkIfVenueApiReturnsJson() throws Exception {
 		
 
 		mvc.perform(get("/api/venues").accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(handler().methodName("getAllVenues")).andExpect(jsonPath("$.length()", equalTo(1)))
+			.andExpect(jsonPath("$._links.self.href", endsWith("/api/venues")));
+
+		verify(venueService).findAll();
+
+	}
+	@Test
+	@WithMockUser(username = {"Mustafa"},password = {"mustafa"},roles = {"ADMINISTRATOR"})
+	public void checkIfJsonHasCorrectLength() throws Exception {
+		
+		Venue venue = new Venue();
+		Venue venue_1 = new Venue();
+		Venue venue_2 = new Venue();
+		mvc.perform(get("/api/venues").accept(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk())
+			.andExpect(handler().methodName("getAllVenues")).andExpect(jsonPath("$.length()", equalTo(3)))
 			.andExpect(jsonPath("$._links.self.href", endsWith("/api/venues")));
 
 		verify(venueService).findAll();
