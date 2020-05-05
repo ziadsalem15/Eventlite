@@ -8,10 +8,20 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.css' rel='stylesheet' />
-<style>
-  body { margin:0; padding:0; }
-  #map { position:absolute; top:500px; bottom:50px; width:66%; }
-</style>
+  <style>
+		 body {
+            margin: 0;
+            padding: 0;
+        }
+        
+	  	#map { position:relative;  bottom: 20px; height: 400px;
+            width: 100%;}
+        
+        * {
+            box-sizing: border-box;
+        }
+	</style>
+	
 </head>
 <body>
   <div layout:fragment="content">
@@ -22,6 +32,7 @@
  	<h4>Time:<p></p><span style="font-weight:normal;"><a th:text = "${event.time}"> </a> </h4> </span>
  	<h4>Description: <p></p>  <span style="font-weight:normal;"><a th:text = "${event.desc}"> </a> </h4> </span>
  	<div style="positon:absolute; right:200px;">
+ 	<br/>
  	<h5><b>Share this event on Twitter!</b></h5>
 	    <form th:action="@{/events/tweet/{id}(id=${id})}" th:object="${event}" method="post">
 	    	<input type="text" id="tweet" name="tweetMsg" placeholder="Write a Tweet" required/>
@@ -29,7 +40,6 @@
 	    </form>
 	    </div>
 	</div> <p></p>
-	    <div style ="position:absolute; right:0; margin-top:-200px; left:200px">
   		<form th:object="${event}" th:action="@{/events/update/{id}(id=${id})}">
   			<button type="submit" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i> Update</button>
   		</form>
@@ -38,8 +48,7 @@
   		<form th:object="${event}" th:action="@{/events/delete/{id}(id=${id})}" th:method="delete">
 	    	<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
 	  	</form>
-	  	</div>
-
+		<br/><br/>
   	    <div class="box">
   	 <div id='map' style="float:right;"></div>
 <script th:inline="javascript">
