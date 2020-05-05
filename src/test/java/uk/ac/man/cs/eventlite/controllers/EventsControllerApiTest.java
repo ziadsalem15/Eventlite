@@ -92,8 +92,9 @@ public class EventsControllerApiTest {
 				.andExpect(handler().methodName("getAllEvents")).andExpect(jsonPath("$.length()", equalTo(2)))
 				.andExpect(jsonPath("$._links.self.href", endsWith("/api/events")))
 				.andExpect(jsonPath("$._embedded.events.length()", equalTo(1)))
-				.andExpect(jsonPath("$._embedded.events[0]._links.venue.href", not(empty())));
-
+				.andExpect(jsonPath("$._embedded.events[0]._links.venue.href", not(empty())))
+				.andExpect(jsonPath("$._embedded.events[0]._links.venue.href", endsWith("events/0/venue")));
+		
 		verify(eventService).findAll();
 	}
 }
