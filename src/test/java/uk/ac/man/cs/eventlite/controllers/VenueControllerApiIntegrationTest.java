@@ -3,7 +3,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.util.Collections;
-
+import static org.hamcrest.CoreMatchers.containsString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,11 +46,12 @@ public class VenueControllerApiIntegrationTest extends AbstractTransactionalJUni
 	@Test
 	public void testVenue() {
 		
-		String expectedResult = "\"name\" : \"Kilburn G23\",\n"+ 
+		String expectedResult = "\"{\n" +
+		"\"name\" : \"Kilburn G23\",\n"+ 
 		"\"address\" : \"Kilburn Building, Oxford Rd, Manchester, M13 9PL\",\n" +
 		"\"capacity\" : 80,\",\n" +
-		"\"longitude\" : 0,\",\n" +
-		"\"latitude\" : 0,\",\n" +
+		"\"longitude\" : -2.237172,\n" +
+		"\"latitude\" : 53.470184,\n" +
 		"\"_links\" : {\n" +
 			"\"self\" : {\n" +
 				"\"href\" : \"http://localhost:8080/api/venues/1\"\n" +
@@ -64,9 +65,12 @@ public class VenueControllerApiIntegrationTest extends AbstractTransactionalJUni
 			"\"next3events\": {\n" +
 				"\"href\": \" http://localhost:8080/api/venues/1/next3events\"\n" +
 			"}\n" +
-		"}\n";
+		"}\n" +
+		"}\"\n";
 	
 		
+		ResponseEntity<String> output = template.exchange("http://localhost:8080/api/venues/1", HttpMethod.GET, httpEntity, String.class);
+		assertThat(output.getBody(), containsString(expectedResult));
 		
 		
 
