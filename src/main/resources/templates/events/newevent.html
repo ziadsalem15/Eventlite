@@ -7,26 +7,32 @@
 </head>
 <body>
   <div layout:fragment="content">
+    <div id='table'></div>
+  
 	
 	<h1>Add Event</h1>
 	
 	<form th:action="@{/events/newevent}" th:object="${events}" th:method="post">
+	<table class="table table-striped table-hover">
+	
 	<br/>
-  	  <label for="name"><b>Event Name</b></label><br>
+  	  <label for="name"><i class="fas fa-bolt"></i><b>Event Name</b></label><br>
 	  <input type="text" id="name" name="name" th:value"${addEvent.name}" required/> </th><br>
 	  <br/>
-	  <label for="name"><b>Date</b></label><br>
+	  <label for="name"><i class="fas fa-calendar"></i><b>Date</b></label><br>
 	  <input type="date" id="date" name="date" th:value"${addEvent.date}" required/> </th><br>
 	  <br/>
-	  <label for="name"><b>Time</b></label><br>
+	  <label for="name"><i class="fas fa-clock"></i><b>Time</b></label><br>
 	  <input type="time" id="time" name="time" th:value"${addEvent.time}"/> </th><br>
 	  <br/>
-	  <label for="name"><b>Venue</b></label><br>
+	  <label for="name"><i class="fas fa-home"></i><b>Venue</b></label><br>
 	  <select id="venue" name="venue">
 	  	<option label=" "></option>
 	  	<option th:each="v : ${venues}" th:value="${v.id}" th:text="${v.name}" required/>
 	  </select>		 
 	  <br/><br/>
+	  </table>
+	  
 	  <input type="submit" id="submit" name="submit" autofocus="autofocus" th:value"$(submit)" /> </th>
 	  <input type="reset" id="reset" name="reset" autofocus="autofocus" th:value"$(reset)" /> </th>
      </form>
