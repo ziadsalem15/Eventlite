@@ -111,6 +111,10 @@ public class EventsController {
 		config.setOAuthAccessToken(ACCESS_KEY);
 		config.setOAuthAccessTokenSecret(ACCESS_SECRET);
 		
+				
+		Event event = eventService.findById(id).get();
+		model.addAttribute("event", event);
+		
 		TwitterFactory factory = new TwitterFactory(config.build());
 		Twitter twitter = factory.getInstance();
 		try {
