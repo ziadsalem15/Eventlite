@@ -1,8 +1,13 @@
 package uk.ac.man.cs.eventlite.controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.lang.Double;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -87,6 +92,19 @@ public class EventsController {
 		            System.out.println("Failed to get timeline: " + te.getMessage());
 		            System.exit(-1);
 		        }
+				Iterator<Event> eventsIterator = eventService.findAll().iterator();
+				Event current;
+				ArrayList<Event> markerEvents = new ArrayList<Event>();
+				while(eventsIterator.hasNext())
+				{
+					current = eventsIterator.next();
+					markerEvents.add(current);
+				}
+				model.addAttribute("eventsToMark", markerEvents);
+				
+				
+				
+				
 				
 				return "events/index";
 			} else {
